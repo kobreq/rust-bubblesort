@@ -1,3 +1,5 @@
+use std::io;
+
 fn sort(arr: &mut [i32]) {
     let n = arr.len();
     for i in 0..n {
@@ -10,8 +12,21 @@ fn sort(arr: &mut [i32]) {
 }
 
 fn main() {
-    let mut arr = [64, 34, 25, 12, 22, 11, 90];
-    println!("Array original: {:?}", arr);
-    sort(&mut arr);
-    println!("Array ordenado: {:?}", arr);
+    let mut input = String::new();
+    println!("Type in the numbers you want ordenated, separated by spaces.");
+
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read input");
+
+    let mut numbers: Vec<i32> = input
+        .trim()
+        .split_whitespace()
+        .map(|s| s.parse().expect("Please, type only numbers."))
+        .collect();
+
+    println!("Given numbers: {:?}", numbers);
+    sort(&mut numbers);
+    println!("Ordenated numbers: {:?}", numbers);
+    println!("Thank you for testing my program! :)");
 }
